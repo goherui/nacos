@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package stream;
+
+option go_package = "./";
+
+message CmsCreateReq {
+  string title = 1;
+  int64 categoryId = 2;
+  string content = 3;
+  int64 status = 4;
+  int64 viewCount = 5;
+  int64 creator = 6;
+}
+message CmsCreateResp {
+  int64 code=1;
+  string msg = 2;
+}
+
+message CmsDelReq {
+  int64 id = 1;
+}
+message CmsDelResp {
+  int64 code=1;
+  string msg = 2;
+}
+
+message CmsUpdateReq {
+  int64 id = 1;
+  string title = 2;
+  int64 categoryId = 3;
+  string content = 4;
+  int64 status = 5;
+  int64 viewCount = 6;
+  int64 creator = 7;
+}
+message CmsUpdateResp {
+  int64 code=1;
+  string msg = 2;
+}
+
+message CmsListReq {
+  int64 page = 1;
+  int64 size = 2;
+}
+message CmsListResp {
+  repeated Cms list=1;
+  int64 code=2;
+  string msg = 3;
+}
+message Cms {
+  int64 id = 1;
+  string title = 2;
+  string categoryName = 3;
+  string content = 4;
+  int64 status = 5;
+  int64 viewCount = 6;
+  int64 creator = 7;
+}
+service StreamGreeter {
+  rpc CmsCreate(CmsCreateReq) returns (CmsCreateResp);
+  rpc CmsDel(CmsDelReq) returns (CmsDelResp);
+  rpc CmsUpdate(CmsUpdateReq) returns (CmsUpdateResp);
+  rpc CmsList(CmsListReq) returns (CmsListResp);
+}

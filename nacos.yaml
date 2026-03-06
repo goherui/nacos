@@ -1,0 +1,18 @@
+Nacos:
+  # 单服务器配置（向后兼容）
+  Addr: "115.190.54.31"
+  Port: 8848
+  
+  # 多服务器配置（高可用，优先级高于单服务器）
+  # 取消注释以下配置以使用多服务器模式
+  # Servers:
+  #   - Addr: "115.190.54.31"
+  #     Port: 8848
+  #   - Addr: "115.190.54.32"
+  #     Port: 8848
+  #   - Addr: "115.190.54.33"
+  #     Port: 8848
+  
+  Namespace: ""
+  DataID: "demo-config"
+  Group: "DEFAULT_GROUP"
