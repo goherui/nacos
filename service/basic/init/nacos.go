@@ -16,29 +16,20 @@ import (
 
 // getProjectRoot 获取项目根目录
 func getProjectRoot() string {
-	// 方法1: 通过环境变量
-	if root := os.Getenv("PROJECT_ROOT"); root != "" {
-		return root
-	}
-	// 方法2: 通过运行时文件路径
 	_, filename, _, ok := runtime.Caller(0)
 	if ok {
-		// 从 init/nacos.go 回溯到项目根目录
 		dir := filepath.Dir(filename)
-		// service/basic/init -> service/basic -> service -> 项目根目录
 		for i := 0; i < 3; i++ {
 			dir = filepath.Dir(dir)
 		}
 		return dir
 	}
-	// 方法3: 默认使用当前工作目录
 	wd, _ := os.Getwd()
 	return wd
 }
 
 func InitNacos() {
 	var err error
-	// 使用动态路径
 	configPath := filepath.Join(getProjectRoot(), "nacos.yaml")
 	viper.SetConfigFile(configPath)
 	err = viper.ReadInConfig()
